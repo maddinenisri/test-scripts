@@ -29,3 +29,4 @@
               elif os.path.isdir(full):  print(f"   {tag} -> {rel}  <<< FOLDER (PROBLEM)")
               else:                      print(f"   {tag} -> {rel}  <<< MISSING (PROBLEM)")
       print()
+    
