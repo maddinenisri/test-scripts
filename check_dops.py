@@ -12,22 +12,25 @@
   dep_path = os.path.join(dep_dir, dep_name)
 
   dep_xml = open(dep_path, encoding="utf-8").read()
-  ops = sorted(set(re.findall(r'operationName="([^"]+)"', dep_xml)))
-  print(f"Deployment '{dep_name}' includes: {', '.join(ops)}\n")
 
-  for op in ops:
-      dop = os.path.join(dep_dir, op)
-      print(f"==== {op} ====")
-      if not os.path.exists(dop):
+  # the real .dop files are in the <operation href="....dop#uuid"/> entries
+  dop_rels = sorted(set(m.split("#")[0] for m in re.findall(r'href="([^"]+\.dop[^"]*)"', dep_xml)))
+  print(f"Deployment '{dep_name}' references .dop files: {', '.join(dop_rels)}\n")
+
+  for rel_dop in dop_rels:
+      dop = os.path.normpath(os.path.join(dep_dir, rel_dop))
+      print(f"==== {rel_dop} ====")
+      if not os.path.isfile(dop):
           print("   MISSING .dop FILE <<< PROBLEM\n")
           continue
+      base = os.path.dirname(dop)          # resolve this .dop's hrefs relative to ITS folder
       x = open(dop, encoding="utf-8").read()
       for tag, href in re.findall(r'<(\w+)[^>]*?href="([^"]+)"', x):
           rel = href.split("#")[0]
           if not rel:
               print(f"   {tag} -> '' EMPTY PATH (=folder) <<< PROBLEM")
               continue
-          full = os.path.normpath(os.path.join(dep_dir, rel))
+          full = os.path.normpath(os.path.join(base, rel))
           if os.path.isfile(full):
               print(f"   {tag} -> {rel}  = OK file")
           elif os.path.isdir(full):
@@ -35,3 +38,4 @@
           else:
               print(f"   {tag} -> {rel}  <<< MISSING (PROBLEM)")
       print()
+  
