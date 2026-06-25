@@ -1,0 +1,40 @@
+ Read prompts/rules/index.md.
+
+  For each listed prompt file:
+  1. Read the prompt.
+  2. Generate the requested Markdown answer.
+  3. Write the answer into the matching response file under responses/rules/.
+  4. Do not modify files under facts/.
+  5. Do not invent behavior beyond the supplied prompt facts.
+  6. Preserve citations to source file and rule UUID.
+
+  For a large client project, do it in batches:
+
+  Process only the first 20 prompt/response pairs from prompts/rules/index.md.
+
+  Then continue:
+
+  Process the next 20 prompt/response pairs.
+
+  Why batching is better
+
+  If there are 1000 rules, asking Roo Cline to process all at once may be slow, expensive, or hit context limits. Batching by folder is safer.
+
+  Example prompt to Roo:
+
+  Process all prompt files under prompts/rules/intake/.
+
+  For each prompt:
+  - Read the full prompt.
+  - Generate the rule requirement markdown.
+  - Write the result into the matching file under responses/rules/intake/.
+  - Keep citations to file path and UUID.
+  - Do not change facts/.
+
+  Best Practice
+
+  Keep three folders separate:
+
+  facts/      machine-generated source evidence, do not edit
+  prompts/    input to Roo Cline / LLM
+  responses/  LLM-generated markdown answers
