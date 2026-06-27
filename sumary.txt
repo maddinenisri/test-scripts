@@ -1,0 +1,73 @@
+ You are generating a business-facing folder summary for an IBM ODM rules folder.
+
+  Goal:
+  Create a concise business summary for this folder using the existing generated knowledge-base Markdown files. Do not load every file fully unless needed. First inspect the folder index
+  and file names, then selectively read only the relevant summaries.
+
+  Rules:
+  1. Use business language in the main sections.
+  2. Do not mention technical terms such as XML, CDATA, BAL, IRL, BRL, TRL, DTA, BOM, Ruleflow, RuleTask, RetePlus, UUID, or Execution Mode in the main sections.
+  3. Put technical details only in a final "Technical Traceability Appendix".
+  4. If business rationale, routing, thresholds, or downstream behavior is not explicit, put it under "Open Questions for Business Validation" or mark it "Inferred - confirm".
+  5. Prefer existing rule-file summaries and child folder summaries over raw source files.
+  6. Read files incrementally. Start with index.md and summary.md files. Only open individual rule summaries when the folder summary needs more detail.
+  7. Do not summarize implementation syntax. Summarize business meaning, inputs, outputs, outcomes, and examples.
+
+  Folder to summarize:
+  <PASTE_FOLDER_PATH_HERE>
+
+  Process:
+  1. List files in the folder.
+  2. Read index.md first.
+  3. Read child summary.md files if present.
+  4. Read individual rule summary Markdown files only when needed.
+  5. Build a consolidated folder summary.
+
+  Output format:
+  # Business Summary: <Folder Name>
+
+  ## Business Purpose
+
+  ## Business Vocabulary
+  | Term | Business Meaning | Example | Source |
+  |---|---|---|---|
+
+  ## Input Elements
+  | Input | Business Meaning | Example | Used By |
+  |---|---|---|---|
+
+  ## Output Elements
+  | Output | Business Meaning | Possible Values | Set By |
+  |---|---|---|---|
+
+  ## Business Rules Summary
+  | Business Rule | Condition | Outcome | Source |
+  |---|---|---|---|
+
+  ## Example Input Cases
+  | Case | Input | Expected Output |
+  |---|---|---|
+
+  ## Expected Output / Result Changes
+
+  ## Dependencies and Parent Context
+
+  ## Open Questions for Business Validation
+
+  ## Technical Traceability Appendix
+  | Source | Technical Detail | Business Equivalent |
+  |---|---|---|
+
+  For your specific issue, point it at the generated knowledge-base folder, not raw ODM:
+
+  Folder to summarize:
+  /c/workspace/odm_project_creation/out/manual-llm-rule-requirements/knowledge-base/panorama-application/rules/3_application/1_rules/questions
+
+  Recommended interactive workflow:
+
+  1. Ask editor agent to read only index.md.
+  2. Ask it to list candidate rule summary files.
+  3. Ask it to read 3-5 files at a time.
+  4. Ask it to produce partial summary.
+  5. Repeat for next batch.
+  6. Ask it to consolidate partial summaries.
